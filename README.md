@@ -1,6 +1,6 @@
 # Proxmox Infra — CCES/IFPE Belo Jardim
 
-Repositório de infraestrutura do servidor Proxmox VE do **Centro de Ciências Exatas e Sociais (CCES)** do IFPE Campus Belo Jardim.
+Repositório de infraestrutura do servidor Proxmox VE da **Coordenação de Curso de Engenharia de Software (CCES)** do IFPE Campus Belo Jardim.
 
 ## 📖 Documentação
 
