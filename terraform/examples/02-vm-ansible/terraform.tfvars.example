@@ -1,0 +1,18 @@
+# Copie para terraform.tfvars e preencha com seus valores.
+
+proxmox_endpoint  = "https://192.168.10.134:8006"
+proxmox_api_token = "user@pam!terraform=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+proxmox_node      = "pve01"
+proxmox_pool      = "researchers"
+
+vm_name      = "ubuntu-docker"
+vm_cores     = 4
+vm_memory    = 4096
+vm_disk_size = 32
+iso_file     = "ubuntu-24.04.4-live-server-amd64.iso"
+
+# ── Etapa 2: Descomente após instalar o SO e obter o IP da VM ──
+# vm_ssh_host        = "192.168.10.XXX"
+# vm_ssh_user        = "ubuntu"
+# vm_ssh_private_key = "~/.ssh/id_rsa"
+# vm_sudo_password   = "senha-do-sudo"   # Deixe vazio se o usuário tem NOPASSWD

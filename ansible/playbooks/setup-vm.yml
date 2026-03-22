@@ -1,0 +1,82 @@
+---
+# Playbook: Configuração inicial de VM — QEMU Guest Agent + Docker
+#
+# Uso:
+#   ansible-playbook -i '<IP_DA_VM>,' -u <usuario> playbooks/setup-vm.yml
+#
+# Requisitos:
+#   - VM com Ubuntu Server instalado e acessível via SSH
+#   - Usuário com permissão sudo
+
+- name: Configuração inicial da VM
+  hosts: all
+  become: true
+
+  tasks:
+    # ──────────────────────────────────────────────
+    # QEMU Guest Agent
+    # ──────────────────────────────────────────────
+    - name: Instalar QEMU Guest Agent
+      ansible.builtin.apt:
+        name: qemu-guest-agent
+        state: present
+        update_cache: true
+
+    - name: Habilitar e iniciar qemu-guest-agent
+      ansible.builtin.systemd:
+        name: qemu-guest-agent
+        enabled: true
+        state: started
+
+    # ──────────────────────────────────────────────
+    # Docker Engine (repositório oficial)
+    # ──────────────────────────────────────────────
+    - name: Instalar dependências do Docker
+      ansible.builtin.apt:
+        name:
+          - ca-certificates
+          - curl
+        state: present
+
+    - name: Criar diretório para keyrings do apt
+      ansible.builtin.file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: "0755"
+
+    - name: Baixar chave GPG do Docker
+      ansible.builtin.get_url:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        dest: /etc/apt/keyrings/docker.asc
+        mode: "0644"
+
+    - name: Adicionar repositório oficial do Docker
+      ansible.builtin.apt_repository:
+        repo: >-
+          deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc]
+          https://download.docker.com/linux/ubuntu
+          {{ ansible_distribution_release }} stable
+        state: present
+
+    - name: Instalar Docker Engine e plugins
+      ansible.builtin.apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+        update_cache: true
+
+    - name: Habilitar e iniciar Docker
+      ansible.builtin.systemd:
+        name: docker
+        enabled: true
+        state: started
+
+    - name: Adicionar usuário ao grupo docker
+      ansible.builtin.user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: true
