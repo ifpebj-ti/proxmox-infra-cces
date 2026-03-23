@@ -1,0 +1,39 @@
+#cloud-config
+# ============================================================================
+# Vendor-data BASE — Docker + QEMU Guest Agent
+# Pré-instalado pelo admin no Proxmox em:
+#   /datapool/templates/snippets/vendor-data-base.yaml
+#
+# Usado como vendor-data (merge com user-data gerado pelo Proxmox).
+# O user-data cuida de: usuário, SSH key, hostname.
+# Este vendor-data cuida de: pacotes e serviços do sistema.
+# ============================================================================
+
+package_update: true
+package_upgrade: true
+
+packages:
+  - qemu-guest-agent
+  - ca-certificates
+  - curl
+  - gnupg
+
+runcmd:
+  # ── QEMU Guest Agent ──
+  - systemctl enable --now qemu-guest-agent
+
+  # ── Docker Engine (repositório oficial) ──
+  - install -m 0755 -d /etc/apt/keyrings
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  - chmod a+r /etc/apt/keyrings/docker.asc
+  - |
+    . /etc/os-release
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $VERSION_CODENAME stable" > /etc/apt/sources.list.d/docker.list
+  - apt-get update
+  - apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+  # ── Adiciona todos os usuários humanos ao grupo docker ──
+  - |
+    for user in $(awk -F: '$3 >= 1000 && $3 < 65534 {print $1}' /etc/passwd); do
+      usermod -aG docker "$user" 2>/dev/null || true
+    done

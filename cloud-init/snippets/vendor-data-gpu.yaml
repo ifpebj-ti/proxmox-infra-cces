@@ -1,0 +1,48 @@
+#cloud-config
+# ============================================================================
+# Vendor-data GPU — Docker + QEMU Guest Agent + Driver NVIDIA 590
+# Pré-instalado pelo admin no Proxmox em:
+#   /datapool/templates/snippets/vendor-data-gpu.yaml
+#
+# Usado para VMs com GPU passthrough (pool researchers apenas).
+# Após o cloud-init instalar o driver, a VM reinicia automaticamente.
+# ============================================================================
+
+package_update: true
+package_upgrade: true
+
+packages:
+  - qemu-guest-agent
+  - ca-certificates
+  - curl
+  - gnupg
+  - ubuntu-drivers-common
+
+runcmd:
+  # ── QEMU Guest Agent ──
+  - systemctl enable --now qemu-guest-agent
+
+  # ── Docker Engine (repositório oficial) ──
+  - install -m 0755 -d /etc/apt/keyrings
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  - chmod a+r /etc/apt/keyrings/docker.asc
+  - |
+    . /etc/os-release
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $VERSION_CODENAME stable" > /etc/apt/sources.list.d/docker.list
+  - apt-get update
+  - apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+  # ── Adiciona todos os usuários humanos ao grupo docker ──
+  - |
+    for user in $(awk -F: '$3 >= 1000 && $3 < 65534 {print $1}' /etc/passwd); do
+      usermod -aG docker "$user" 2>/dev/null || true
+    done
+
+  # ── Driver NVIDIA 590 ──
+  - apt-get install -y nvidia-driver-590
+
+power_state:
+  delay: now
+  mode: reboot
+  message: "Reiniciando apos instalacao do driver NVIDIA 590"
+  condition: true

@@ -22,11 +22,21 @@ terraform/examples/
 │   ├── vm.tf                   ← Recurso da VM + outputs
 │   └── ansible.tf              ← Provisionamento via Ansible
 │
-└── 03-vm-gpu-ansible/          ← VM Ubuntu + GPU RTX 4060 + Ansible
+├── 03-vm-gpu-ansible/          ← VM Ubuntu + GPU RTX 4060 + Ansible
+│   ├── main.tf                 ← Provider
+│   ├── variables.tf            ← Variáveis
+│   ├── vm.tf                   ← Recurso da VM com GPU + outputs
+│   └── ansible.tf              ← Provisionamento via Ansible
+│
+└── 04-vm-cloud-init/           ← VM automatizada com cloud-init (sem instalar SO)
     ├── main.tf                 ← Provider
     ├── variables.tf            ← Variáveis
-    ├── vm.tf                   ← Recurso da VM com GPU + outputs
-    └── ansible.tf              ← Provisionamento via Ansible
+    ├── vm.tf                   ← Template lookup + VM clone + cloud-init + outputs
+    └── cloud-config.yaml.tftpl ← Template cloud-config (user, Docker, NVIDIA)
+
+cloud-init/
+├── create-template.sh          ← Script para criar template no Proxmox (executar 1x)
+└── README.md
 
 ansible/
 └── playbooks/
@@ -44,6 +54,7 @@ ansible/
 | 01 | [VM Ubuntu ISO](01-vm-ubuntu-iso/) | VM otimizada com ISO montada, instalação manual do SO | `main.tf` `vm.tf` `variables.tf` | researchers / students |
 | 02 | [VM + Ansible](02-vm-ansible/) | VM + provisionamento automático (QEMU Guest Agent + Docker) | `main.tf` `vm.tf` `ansible.tf` `variables.tf` | researchers / students |
 | 03 | [VM + GPU + Ansible](03-vm-gpu-ansible/) | VM com GPU RTX 4060 passthrough + Ansible | `main.tf` `vm.tf` `ansible.tf` `variables.tf` | researchers **apenas** |
+| 04 | [VM Cloud-Init](04-vm-cloud-init/) | **Deploy automatizado** — sem instalar SO, com Docker + NVIDIA | `main.tf` `vm.tf` `cloud-config.yaml.tftpl` `variables.tf` | researchers / students |
 
 ## Como usar cada exemplo
 
@@ -61,10 +72,10 @@ terraform apply
 
 ## Tokens compatíveis
 
-| Token | 00 (Teste) | 01 (ISO) | 02 (Ansible) | 03 (GPU) |
-|---|---|---|---|---|
-| `elton@pam!terraform` | ✅ | ✅ | ✅ | ✅ |
-| `terraform-research@pve!terraform` | ✅ | ✅ | ✅ | ✅ |
-| `terraform-students@pve!terraform` | ✅ | ✅ | ✅ | ❌ (sem acesso a GPU) |
-| Token pessoal de pesquisador | ✅ | ✅ | ✅ | ✅ |
-| Token pessoal de aluno | ✅ | ✅ | ✅ | ❌ (sem acesso a GPU) |
+| Token | 00 (Teste) | 01 (ISO) | 02 (Ansible) | 03 (GPU) | 04 (Cloud-Init) |
+|---|---|---|---|---|---|
+| `elton@pam!terraform` | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `terraform-research@pve!terraform` | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `terraform-students@pve!terraform` | ✅ | ✅ | ✅ | ❌ (sem acesso a GPU) | ✅ |
+| Token pessoal de pesquisador | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Token pessoal de aluno | ✅ | ✅ | ✅ | ❌ (sem acesso a GPU) | ✅ |
