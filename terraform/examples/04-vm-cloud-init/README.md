@@ -82,6 +82,7 @@ Pronto! Após ~2 minutos, a VM estará rodando com:
 - ✅ Sudo sem senha
 - ✅ QEMU Guest Agent ativo
 - ✅ Docker Engine + Compose instalados
+- ✅ NFS `/mnt/research` montado (dados de pesquisa compartilhados)
 - ✅ Driver NVIDIA (se usar `vendor-data-gpu.yaml`)
 
 ### Acessar a VM
@@ -124,6 +125,28 @@ nvidia-smi
 
 > **Nota**: GPU passthrough precisa estar configurado no Proxmox (IOMMU, Resource Mapping).
 > Apenas o pool `researchers` tem acesso às GPUs.
+
+## Dados de pesquisa (NFS)
+
+Os vendor-data (`base` e `gpu`) já incluem a montagem automática do diretório compartilhado de dados de pesquisa via NFS.
+
+Ao criar a VM, o cloud-init:
+1. Instala o cliente NFS (`nfs-common`)
+2. Cria o ponto de montagem `/mnt/research`
+3. Registra no `/etc/fstab` para montagem persistente
+4. Monta o compartilhamento imediatamente
+
+Após o boot, o diretório já está disponível:
+
+```bash
+ssh pesquisador@<IP>
+ls /mnt/research
+```
+
+O compartilhamento aponta para `192.168.10.134:/datapool/research-data` (ZFS, 20TB SSD) no host Proxmox.
+A escrita funciona com o usuário normal da VM (sem `sudo`), graças à configuração `all_squash` no servidor NFS.
+
+> Veja a [documentação completa do NFS](https://github.com/ifpebj-ti/proxmox-infra-cces/wiki/07-NFS-Research-Data) para detalhes da configuração do servidor.
 
 ## Estrutura dos arquivos
 

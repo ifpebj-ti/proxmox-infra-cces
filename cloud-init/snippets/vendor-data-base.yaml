@@ -17,6 +17,7 @@ packages:
   - ca-certificates
   - curl
   - gnupg
+  - nfs-common
 
 runcmd:
   # ── QEMU Guest Agent ──
@@ -37,3 +38,8 @@ runcmd:
     for user in $(awk -F: '$3 >= 1000 && $3 < 65534 {print $1}' /etc/passwd); do
       usermod -aG docker "$user" 2>/dev/null || true
     done
+
+  # ── NFS: Montar research-data do host Proxmox ──
+  - mkdir -p /mnt/research
+  - echo "192.168.10.134:/datapool/research-data /mnt/research nfs defaults,_netdev 0 0" >> /etc/fstab
+  - mount /mnt/research
