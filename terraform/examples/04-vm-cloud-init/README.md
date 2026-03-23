@@ -115,7 +115,7 @@ gpu_mapping           = "gpu-rtx4060-01"
 vendor_data_file_id   = "datapool-templates:snippets/vendor-data-gpu.yaml"
 ```
 
-O vendor-data GPU instala o driver NVIDIA 590 e **reinicia a VM automaticamente** para que o módulo carregue. Após o reboot, verifique:
+O vendor-data GPU instala o driver NVIDIA 590, o que pode demorar um pouco, e **reinicia a VM automaticamente** para que o módulo carregue. Logo, sua sessão do shell será reiniciada. Após o reboot, verifique:
 
 ```bash
 ssh pesquisador@<IP>
