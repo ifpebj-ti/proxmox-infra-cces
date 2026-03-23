@@ -1,0 +1,29 @@
+# Copie para terraform.tfvars e preencha com seus valores.
+
+proxmox_endpoint  = "https://192.168.10.134:8006"
+proxmox_api_token = "user@pam!terraform=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+proxmox_node      = "pve01"
+proxmox_pool      = "researchers"
+
+# Template (criado pelo script cloud-init/create-template.sh)
+template_id   = 9000                  # ID do template (mais confiável)
+# template_name = "ubuntu-2404-cloud" # Ou busque por nome (se template_id = 0)
+
+# VM
+vm_name      = "ubuntu-cloud"
+vm_cores     = 4
+vm_memory    = 4096
+vm_disk_size = 32
+
+# Cloud-Init — usuário + SSH (chave pública é lida automaticamente do arquivo)
+vm_user             = "pesquisador"
+ssh_public_key_file = "~/.ssh/id_rsa.pub"
+
+# Vendor-data — snippet pré-instalado pelo admin no Proxmox
+# Base (Docker + qemu-guest-agent):
+# vendor_data_file_id = "datapool-templates:snippets/vendor-data-base.yaml"  # (padrão)
+# GPU (Docker + qemu-guest-agent + NVIDIA driver 590):
+# vendor_data_file_id = "datapool-templates:snippets/vendor-data-gpu.yaml"
+
+# GPU — descomente para VM com GPU passthrough (pool researchers apenas)
+# gpu_mapping = "gpu-rtx4060-01"    # Slot 1 (PCIe CPU) ou gpu-rtx4060-02 (Slot 2)
