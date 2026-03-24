@@ -43,3 +43,10 @@ runcmd:
   - mkdir -p /mnt/research
   - echo "192.168.10.134:/datapool/research-data /mnt/research nfs defaults,_netdev 0 0" >> /etc/fstab
   - mount /mnt/research
+
+  # ── Pasta pessoal do usuário no NFS ──
+  - |
+    CLOUD_USER=$(getent passwd 1000 | cut -d: -f1)
+    if [ -n "$CLOUD_USER" ]; then
+      mkdir -p "/mnt/research/$CLOUD_USER"
+    fi
