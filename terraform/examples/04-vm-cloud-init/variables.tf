@@ -1,7 +1,7 @@
 # ── Provider ──
 
 variable "proxmox_endpoint" {
-  description = "URL da API do Proxmox (ex: https://192.168.10.134:8006)"
+  description = "URL da API do Proxmox (ex: https://10.26.7.10:8006)"
   type        = string
 }
 

@@ -1,6 +1,6 @@
 # Copie para terraform.tfvars e preencha com seus valores.
 
-proxmox_endpoint  = "https://192.168.10.134:8006"
+proxmox_endpoint  = "https://10.26.7.10:8006"
 proxmox_api_token = "user@pve!terraform=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 proxmox_node      = "pve01"
 proxmox_pool      = "researchers"   # GPU só está disponível para researchers
@@ -16,7 +16,7 @@ gpu_mapping = "gpu-rtx4060-01"    # Slot 1 (PCIe CPU — menor latência)
 # gpu_mapping = "gpu-rtx4060-02"  # Slot 2 (PCIe Chipset)
 
 # ── Etapa 2: Descomente após instalar o SO e obter o IP da VM ──
-# vm_ssh_host        = "192.168.10.XXX"
+# vm_ssh_host        = "10.26.7.XXX"
 # vm_ssh_user        = "ubuntu"
 # vm_ssh_private_key = "~/.ssh/id_rsa"
 # vm_sudo_password   = "senha-do-sudo"   # Deixe vazio se o usuário tem NOPASSWD

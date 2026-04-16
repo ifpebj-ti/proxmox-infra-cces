@@ -41,7 +41,7 @@ runcmd:
 
   # ── NFS: Montar research-data do host Proxmox ──
   - mkdir -p /mnt/research
-  - echo "192.168.10.134:/datapool/research-data /mnt/research nfs defaults,_netdev 0 0" >> /etc/fstab
+  - echo "10.26.7.10:/datapool/research-data /mnt/research nfs defaults,_netdev 0 0" >> /etc/fstab
   - mount /mnt/research
 
   # ── Pasta pessoal do usuário no NFS ──

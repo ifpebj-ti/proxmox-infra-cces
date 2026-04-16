@@ -28,10 +28,10 @@ Na primeira boot, ele configura automaticamente:
 
 ```bash
 # Do admin, envie o script via SCP:
-scp cloud-init/create-template.sh root@192.168.10.134:/tmp/
+scp cloud-init/create-template.sh root@10.26.7.10:/tmp/
 
 # Via SSH no Proxmox:
-ssh root@192.168.10.134 "bash /tmp/create-template.sh"
+ssh root@10.26.7.10 "bash /tmp/create-template.sh"
 ```
 
 O script usa os seguintes padrões:
@@ -67,7 +67,7 @@ Os arquivos em `snippets/` contêm a configuração de pacotes que roda no prime
 ### Copie para o Proxmox
 
 ```bash
-scp cloud-init/snippets/vendor-data-*.yaml root@192.168.10.134:/datapool/templates/snippets/
+scp cloud-init/snippets/vendor-data-*.yaml root@10.26.7.10:/datapool/templates/snippets/
 ```
 
 ### Snippets disponíveis

@@ -35,10 +35,10 @@ Execute o script **uma única vez** no host Proxmox:
 
 ```bash
 # Do admin, envie o script:
-scp cloud-init/create-template.sh root@192.168.10.134:/tmp/
+scp cloud-init/create-template.sh root@10.26.7.10:/tmp/
 
 # No Proxmox, execute:
-ssh root@192.168.10.134 "bash /tmp/create-template.sh"
+ssh root@10.26.7.10 "bash /tmp/create-template.sh"
 ```
 
 ### 2. Snippets copiados para o Proxmox (admin)
@@ -46,7 +46,7 @@ ssh root@192.168.10.134 "bash /tmp/create-template.sh"
 Os vendor-data ficam em `cloud-init/snippets/`. Copie para o host:
 
 ```bash
-scp cloud-init/snippets/vendor-data-*.yaml root@192.168.10.134:/datapool/templates/snippets/
+scp cloud-init/snippets/vendor-data-*.yaml root@10.26.7.10:/datapool/templates/snippets/
 ```
 
 Isso disponibiliza os snippets no storage `datapool-templates`.
@@ -143,7 +143,7 @@ ssh pesquisador@<IP>
 ls /mnt/research
 ```
 
-O compartilhamento aponta para `192.168.10.134:/datapool/research-data` (ZFS, 20TB SSD) no host Proxmox.
+O compartilhamento aponta para `10.26.7.10:/datapool/research-data` (ZFS, 20TB SSD) no host Proxmox.
 A escrita funciona com o usuário normal da VM (sem `sudo`), graças à configuração `all_squash` no servidor NFS.
 
 > Veja a [documentação completa do NFS](https://github.com/ifpebj-ti/proxmox-infra-cces/wiki/07-NFS-Research-Data) para detalhes da configuração do servidor.

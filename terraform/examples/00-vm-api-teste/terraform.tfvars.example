@@ -1,7 +1,7 @@
 # Copie este arquivo para terraform.tfvars e preencha com seus valores reais.
 # NUNCA commite o terraform.tfvars (está no .gitignore).
 
-proxmox_endpoint  = "https://192.168.10.134:8006"
+proxmox_endpoint  = "https://10.26.7.10:8006"
 proxmox_api_token = "user@pam!terraform=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 proxmox_node      = "pve01"            # Altere para o hostname real do seu nó Proxmox
 proxmox_pool      = "researchers"    # Resource pool: "researchers" ou "students"
