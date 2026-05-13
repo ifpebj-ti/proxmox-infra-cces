@@ -19,6 +19,14 @@ A documentação completa de configuração do servidor está na **[Wiki deste r
 | [06 — GPU Passthrough](../../wiki/06-GPU-Passthrough) | Passthrough das 2x RTX 4060, Resource Mappings, guia do pesquisador |
 | [07 — NFS / Research Data](../../wiki/07-NFS-Research-Data) | Compartilhamento de dados de pesquisa via NFS |
 
+## 🌐 Acesso ao Proxmox
+
+O servidor Proxmox pode ser acessado por qualquer um destes endereços:
+
+- `https://172.26.3.10:8006`
+- `https://ia.belojardim.ifpe.edu.br:8006`
+- `https://pve01.cces.belojardim.ifpe.edu.br:8006`
+
 ## 📁 Estrutura do Repositório
 
 ```

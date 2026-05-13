@@ -28,11 +28,13 @@ Na primeira boot, ele configura automaticamente:
 
 ```bash
 # Do admin, envie o script via SCP:
-scp cloud-init/create-template.sh root@10.26.7.10:/tmp/
+scp cloud-init/create-template.sh root@172.26.3.10:/tmp/
 
 # Via SSH no Proxmox:
-ssh root@10.26.7.10 "bash /tmp/create-template.sh"
+ssh root@172.26.3.10 "bash /tmp/create-template.sh"
 ```
+
+Você também pode usar `ia.belojardim.ifpe.edu.br` ou `pve01.cces.belojardim.ifpe.edu.br` no lugar do IP `172.26.3.10`.
 
 O script usa os seguintes padrões:
 
@@ -67,7 +69,7 @@ Os arquivos em `snippets/` contêm a configuração de pacotes que roda no prime
 ### Copie para o Proxmox
 
 ```bash
-scp cloud-init/snippets/vendor-data-*.yaml root@10.26.7.10:/datapool/templates/snippets/
+scp cloud-init/snippets/vendor-data-*.yaml root@172.26.3.10:/datapool/templates/snippets/
 ```
 
 ### Snippets disponíveis

@@ -39,14 +39,14 @@ Após instalar o SO e a VM estar acessível via SSH:
 
 1. **Copie sua chave SSH** para a VM (será pedida a senha do usuário):
    ```bash
-   ssh-copy-id usuario@192.168.10.XXX
+   ssh-copy-id usuario@172.26.3.XXX
    ```
 
 2. **Configure o sudo** — escolha **uma** das opções:
 
    **Opção A (recomendada para automação):** Sudo sem senha:
    ```bash
-   ssh usuario@192.168.10.XXX 'echo "usuario ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/usuario'
+   ssh usuario@172.26.3.XXX 'echo "usuario ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/usuario'
    ```
 
    **Opção B:** Passar a senha via Terraform — adicione no `.tfvars`:
@@ -57,7 +57,7 @@ Após instalar o SO e a VM estar acessível via SSH:
 3. **Preencha o `.tfvars`** e aplique:
    ```bash
    # Edite terraform.tfvars e descomente/preencha:
-   #   vm_ssh_host        = "192.168.10.XXX"
+   #   vm_ssh_host        = "172.26.3.XXX"
    #   vm_ssh_user        = "usuario"
    #   vm_ssh_private_key = "~/.ssh/id_rsa"
    #   vm_sudo_password   = ""              ← Opção A (NOPASSWD)
