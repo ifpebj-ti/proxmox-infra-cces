@@ -16,7 +16,7 @@ A documentação completa de configuração do servidor está na **[Wiki deste r
 | [03 — Storage](../../wiki/03-Storage) | Configuração de storage (ZFS, NVMe, SSD 20TB) |
 | [04 — Backup](../../wiki/04-Backup) | Job de backup automático |
 | [05 — Usuários, Grupos e Permissões](../../wiki/05-Usuarios-Grupos-Permissoes) | Realms, roles, ACLs, API tokens, TFA |
-| [06 — GPU Passthrough](../../wiki/06-GPU-Passthrough) | Passthrough das 2x RTX 4060, Resource Mappings, guia do pesquisador |
+| [06 — GPU Passthrough](../../wiki/06-GPU-Passthrough) | Passthrough de GPUs, Resource Mappings, guia do pesquisador |
 | [07 — NFS / Research Data](../../wiki/07-NFS-Research-Data) | Compartilhamento de dados de pesquisa via NFS |
 
 ## 📁 Estrutura do Repositório
@@ -33,14 +33,27 @@ proxmox-infra-cces/
 
 ## 🖥️ Hardware do Servidor
 
+### pve01 — Servidor 1
+
 | Componente | Especificação |
 |---|---|
 | Placa-mãe | ASUS TUF GAMING X670E-Plus |
-| Processador | AMD Ryzen 9 |
+| Processador | AMD Ryzen 9 7950X 16-Core |
 | Memória RAM | 64 GB DDR5 (4x 16GB) |
 | NVMe (Sistema) | 2x Samsung 990 Pro 4TB (RAID1 ZFS) |
 | SSD (Dados) | 1x SSD 20TB |
 | GPUs | 2x NVIDIA RTX 4060 (ZOTAC) — GPU Passthrough |
+
+### pve02 — Servidor 2
+
+| Componente | Especificação |
+|---|---|
+| Placa-mãe | MSI MPG X870E CARBON WIFI |
+| Processador | AMD Ryzen 9 9950X 16-Core |
+| Memória RAM | 128 GB DDR5 (4x 32GB) |
+| NVMe (Sistema) | 2x Samsung 990 Pro 4TB (RAID1 ZFS) |
+| SSD (Dados) | 1x SSD 20TB |
+| GPUs | 2x NVIDIA GeForce RTX 5060 Ti |
 
 ## 👥 Equipe de Administração
 
