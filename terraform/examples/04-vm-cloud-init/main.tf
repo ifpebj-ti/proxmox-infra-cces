@@ -21,6 +21,6 @@ provider "proxmox" {
 
   ssh {
     agent = false
-    
+
   }
 }
