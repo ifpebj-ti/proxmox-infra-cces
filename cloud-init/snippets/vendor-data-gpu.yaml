@@ -1,6 +1,6 @@
 #cloud-config
 # ============================================================================
-# Vendor-data GPU — Docker + QEMU Guest Agent + Driver NVIDIA 590
+# Vendor-data GPU — Docker + QEMU Guest Agent + NVIDIA Open Kernel Module 595
 # Pré-instalado pelo admin no Proxmox em:
 #   /datapool/templates/snippets/vendor-data-gpu.yaml
 #
@@ -51,11 +51,11 @@ runcmd:
       mkdir -p "/mnt/research/$CLOUD_USER"
     fi
 
-  # ── Driver NVIDIA 590 ──
-  - apt-get install -y nvidia-driver-590
+  # ── Driver NVIDIA open kernel module (necessário para RTX 50-series) ──
+  - apt-get install -y nvidia-driver-595-open
 
 power_state:
   delay: now
   mode: reboot
-  message: "Reiniciando apos instalacao do driver NVIDIA 590"
+  message: "Reiniciando apos instalacao do driver NVIDIA 595 open"
   condition: true

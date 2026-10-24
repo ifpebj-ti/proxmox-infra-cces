@@ -1,0 +1,29 @@
+# Copie para terraform.tfvars e preencha; nunca coloque um token real no Git.
+
+proxmox_endpoint  = "https://172.26.3.10:8006"
+proxmox_api_token = "USER@REALM!TOKENID=SUBSTITUA-PELO-SEGREDO"
+proxmox_node      = "pve02"
+proxmox_pool      = "researchers"
+
+# O template 9000 existe no pve01. O provider clona do nó de origem e
+# migra os discos para local-zfs no pve02.
+template_id         = 9000
+template_node       = "pve01"
+clone_datastore_id  = "local-zfs"
+
+# VM
+vm_name      = "ubuntu-cloud-elton-pve02"
+vm_cores     = 8
+vm_memory    = 65536 # MB: 64 GiB
+vm_disk_size = 320   # GB
+
+# Cloud-Init
+vm_user             = "elton"
+ssh_public_key_file = "~/.ssh/id_rsa.pub"
+
+# O snippet precisa existir no storage local datapool-templates-pve02 do pve02.
+# vendor_data_file_id = "datapool-templates-pve02:snippets/vendor-data-base.yaml"
+vendor_data_file_id = "datapool-templates-pve02:snippets/vendor-data-gpu.yaml"
+
+# Mapping PCI já criado para a RTX 5060 Ti no pve02.
+gpu_mapping = "gpu-rtx5060ti-pve02-01"
