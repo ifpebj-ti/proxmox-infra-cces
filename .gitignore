@@ -1,1 +1,21 @@
 proxmox-infra-cces-and-wiki.code-workspace
+
+# Terraform local state and provider data
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+
+# Terraform variable files may contain credentials
+*.tfvars
+*.tfvars.json
+*.auto.tfvars
+*.auto.tfvars.json
+
+# Terraform crash logs and local overrides
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
