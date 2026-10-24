@@ -13,11 +13,12 @@ A documentação completa de configuração do servidor está na **[Wiki deste r
 | [Home](../../wiki) | Índice geral |
 | [01 — Hardware e BIOS](../../wiki/01-Hardware-e-BIOS) | Especificações do hardware e configurações da UEFI/BIOS |
 | [02 — Instalação do Proxmox](../../wiki/02-Instalacao-Proxmox) | Instalação do Proxmox VE com ZFS RAID1 |
-| [03 — Storage](../../wiki/03-Storage) | Configuração de storage (ZFS, NVMe, SSD 20TB) |
-| [04 — Backup](../../wiki/04-Backup) | Job de backup automático |
-| [05 — Usuários, Grupos e Permissões](../../wiki/05-Usuarios-Grupos-Permissoes) | Realms, roles, ACLs, API tokens, TFA |
-| [06 — GPU Passthrough](../../wiki/06-GPU-Passthrough) | Passthrough de GPUs, Resource Mappings, guia do pesquisador |
-| [07 — NFS / Research Data](../../wiki/07-NFS-Research-Data) | Compartilhamento de dados de pesquisa via NFS |
+| [03 — Rede e Cluster](../../wiki/03-Rede-e-Cluster) | Configuração básica de rede pós-instalação |
+| [04 — Storage](../../wiki/04-Storage) | Configuração de storage (ZFS, NVMe, SSD 20TB) |
+| [05 — Backup](../../wiki/05-Backup) | Job de backup automático |
+| [06 — Usuários, Grupos e Permissões](../../wiki/06-Usuarios-Grupos-Permissoes) | Realms, roles, ACLs, API tokens, TFA |
+| [07 — GPU Passthrough](../../wiki/07-GPU-Passthrough) | Passthrough de GPUs, Resource Mappings, guia do pesquisador |
+| [08 — NFS / Research Data](../../wiki/08-NFS-Research-Data) | Compartilhamento de dados de pesquisa via NFS |
 
 ## 📁 Estrutura do Repositório
 

@@ -146,7 +146,7 @@ ls /mnt/research
 O compartilhamento aponta para `172.26.3.10:/datapool/research-data` (ZFS, 20TB SSD) no host Proxmox.
 A escrita funciona com o usuário normal da VM (sem `sudo`), graças à configuração `all_squash` no servidor NFS.
 
-> Veja a [documentação completa do NFS](https://github.com/ifpebj-ti/proxmox-infra-cces/wiki/07-NFS-Research-Data) para detalhes da configuração do servidor.
+> Veja a [documentação completa do NFS](https://github.com/ifpebj-ti/proxmox-infra-cces/wiki/08-NFS-Research-Data) para detalhes da configuração do servidor.
 
 ## Estrutura dos arquivos
 
